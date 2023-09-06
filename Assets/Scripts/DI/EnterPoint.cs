@@ -16,6 +16,10 @@ namespace tank.di
         [SerializeField] private LevelFactory _levelFactory;
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private PlayerConfig _playerConfig;
+        [SerializeField] private CameraMover _cameraMover;
+
+        [SerializeField] private WeaponConfigSet _weaponConfigSet;
+        [SerializeField] private Level _levelPrefab;        
 
         private IInput _input;
 
@@ -32,6 +36,9 @@ namespace tank.di
             
             container.BindInstance(_gameConfig);
             container.BindInstance(_playerConfig);
+            container.BindInstance(_cameraMover);
+            container.BindInstance(_weaponConfigSet);
+            container.BindInstance(_levelPrefab);
             //container.BindInstance(_levelFactory);            
 
             GameStateMachine gameStateMachine = container.Resolve<GameStateMachine>();

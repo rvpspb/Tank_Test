@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using tank.config;
 
 namespace tank.core
 {
@@ -11,14 +12,14 @@ namespace tank.core
         private Rigidbody _rigidbody;
         private float _moveSpeed;
         private float _rotateSpeed;
+        private float _acceleration = 0.2f;
+        
 
-        public void Construct()
+        public void Construct(UnitConfig unitConfig)
         {
             _rigidbody = GetComponent<Rigidbody>();
-
-            _moveSpeed = 10;
-
-            _rotateSpeed = 5;
+            _moveSpeed = unitConfig.MoveSpeed;
+            _rotateSpeed = unitConfig.RotationSpeed;
         }
 
         public void SetMoveDirection(float value)
@@ -33,13 +34,12 @@ namespace tank.core
 
         private void FixedUpdate()
         {
-            _rigidbody.velocity = _moveDirection * _moveSpeed * transform.forward;
+            Vector3 needVelocity = _moveDirection * _moveSpeed * transform.forward;
+            Vector3 needAngularVelocity = new Vector3(0, _rotateSpeed * _rotateDirection * Mathf.Sign(_moveDirection), 0f);
 
-            _rigidbody.angularVelocity = new Vector3(0, _rotateSpeed * _rotateDirection * Mathf.Sign(_moveDirection), 0f);
+            _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, needVelocity, _acceleration);
+            _rigidbody.angularVelocity = Vector3.Lerp(_rigidbody.angularVelocity, needAngularVelocity, _acceleration);
 
-            //Quaternion rotationAdd = Quaternion.AngleAxis(_rotateSpeed * _rotateDirection * Time.fixedDeltaTime, Vector3.up);
-
-            //_rigidbody.MoveRotation(rotationAdd * _rigidbody.rotation);
         }
 
         

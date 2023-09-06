@@ -9,30 +9,14 @@ namespace tank.factory
 {
     public class MonoFactory<TType> where TType : MonoBehaviour
     {
+        protected TType _prefab;
 
-        private TType _prefab;
-        private List<TType> _spawned;
-
-
-        public MonoFactory()
-        {
-            _spawned = new List<TType>();
-        }
-
-        public TType Spawn()
+        public virtual TType GetNewInstance()
         {
             GameObject gameObject = KhtPool.GetObject(_prefab.gameObject);
-            return gameObject.GetComponent<TType>();
-        }
-
-        public void ClearSpawned()
-        {
-            for (int i = 0; i < _spawned.Count; i++)
-            {
-                KhtPool.ReturnObject(_spawned[i].gameObject);
-            }
-
-            _spawned.Clear();
-        }
+            gameObject.SetActive(true);
+            TType inctance = gameObject.GetComponent<TType>();
+            return inctance;
+        }     
     }
 }

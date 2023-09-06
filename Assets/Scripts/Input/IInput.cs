@@ -6,13 +6,14 @@ namespace tank.input
     {
         float Vertical { get; }
         float Horizontal { get; }
+        float WeaponWheel { get; }
         bool IsInverted { get; }
         bool IsEnabled { get; }
-        bool IsFireHold { get; }
+        bool IsFireHold { get; }        
 
         event Action OnAnyKey;
-        event Action OnUpdate;        
-
+        event Action OnUpdate;
+        
         void SetInverted(bool value);
         void SetEnabled(bool value);
     }

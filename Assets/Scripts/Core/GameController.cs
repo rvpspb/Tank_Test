@@ -34,13 +34,15 @@ namespace tank.core
 
         public void LoadLevel()
         {
-            //_currentLevel = _levelFactory.Spawn();
-            //_currentLevel.Construct();
+            _currentLevel = _levelFactory.GetNewInstance();
+            _currentLevel.Construct();
             //
 
-            Container container = Container.Initialize();
+            //Container container = Container.Initialize();
 
-            Player player = container.Resolve<Player>(npg.bindlessdi.Instantiation.InstantiationPolicy.Single);
+            
+
+
         }
 
         public void ResetLevel()

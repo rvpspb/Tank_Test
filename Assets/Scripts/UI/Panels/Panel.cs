@@ -17,8 +17,11 @@ namespace tank.ui
 
         public void Hide()
         {
-            gameObject.SetActive(false);
-            OnHide();
+            if (gameObject.activeSelf)
+            {
+                gameObject.SetActive(false);
+                OnHide();
+            }            
         }
 
         protected virtual void OnHide()

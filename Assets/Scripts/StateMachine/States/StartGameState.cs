@@ -31,6 +31,8 @@ namespace tank.states
 				return;
 			}
 
+			_input.SetEnabled(true);
+
 			_startPanel.Show();
 			_gameController.ResetLevel();
 

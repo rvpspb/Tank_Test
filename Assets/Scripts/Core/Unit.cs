@@ -9,14 +9,19 @@ namespace tank.core
 {
     public class Unit
     {
-        //public T View { get; protected set; }
-
+        
         public event Action OnDie;
         protected GameObject _gameObject;
-        
+        public bool IsAlive { get; private set; }
 
-        public void Die()
+        public void SetAlive(bool value)
         {
+            IsAlive = value;
+        }
+
+        protected virtual void Die()
+        {
+            SetAlive(false);
             OnDie?.Invoke();
             KhtPool.ReturnObject(_gameObject);
         }

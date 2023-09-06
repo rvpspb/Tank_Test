@@ -14,19 +14,16 @@ namespace tank.input
         private int _directionMod;
         public float Vertical { get; private set; }
         public float Horizontal { get; private set; }
+        public float WeaponWheel { get; private set; }
 
         public event Action OnAnyKey;
-        public event Action OnUpdate;        
+        public event Action OnUpdate;
+        public event Action<int> OnWeaponChanged;
 
         private const string s_Vertical = "Vertical";
         private const string s_Horizontal = "Horizontal";
+        private const string s_WeaponWheel = "WeaponWheel";
         private const string s_Fire = "Fire1";
-
-        private void Awake()
-        {
-            SetInverted(false);
-            SetEnabled(true);
-        }
 
         private void Update()
         {
@@ -35,15 +32,14 @@ namespace tank.input
                 return;
             }
 
-            GetInput();
-
-            
+            GetInput();            
         }
 
         private void GetInput()
         {
             Vertical = Input.GetAxisRaw(s_Vertical) * GetDirectionMod(IsInverted);
             Horizontal = Input.GetAxisRaw(s_Horizontal) * GetDirectionMod(IsInverted);
+            WeaponWheel = Input.GetAxisRaw(s_WeaponWheel);
             IsFireHold = Input.GetButton(s_Fire);
 
             if (Input.anyKeyDown)

@@ -8,7 +8,9 @@ namespace tank.config
     public class UnitConfig : ScriptableObject
     {
         [field: SerializeField] public GameObject Prefab { get; private set; }
-        [field: SerializeField] public float StartHealth { get; private set; }
+        [field: SerializeField] public float Health { get; private set; }
+        [field: SerializeField] public float Armor { get; private set; }
         [field: SerializeField] public float MoveSpeed { get; private set; }
+        [field: SerializeField] public float RotationSpeed { get; private set; }
     }
 }

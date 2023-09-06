@@ -7,6 +7,9 @@ namespace tank.factory
 {
     public class LevelFactory : MonoFactory<Level>
     {
-        
+        public LevelFactory(Level levelPrefab)
+        {
+            _prefab = levelPrefab;
+        }
     }
 }
