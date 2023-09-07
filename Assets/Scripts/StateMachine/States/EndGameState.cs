@@ -49,7 +49,7 @@ namespace tank.states
 				
 		private void RestartGame()
 		{
-			_gameStateMachine.Enter<StartGameState>();
+			_gameStateMachine.Enter<LoadGameState>();
 		}
 	}
 }

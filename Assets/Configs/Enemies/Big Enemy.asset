@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9234cd3dc7442242ac05b736b41543d, type: 3}
   m_Name: Big Enemy
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 7289198608029807442, guid: 8e514d75fc4d35a4aa16d3fea34f4065, type: 3}
-  <Health>k__BackingField: 30
+  <Prefab>k__BackingField: {fileID: 1265942344099153285, guid: be0ddd9851784554aaab6790743264a9, type: 3}
+  <Health>k__BackingField: 20
   <Armor>k__BackingField: 0.3
   <MoveSpeed>k__BackingField: 3
   <RotationSpeed>k__BackingField: 3
   <Damage>k__BackingField: 20
+  <ReactionTime>k__BackingField: 1

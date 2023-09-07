@@ -75,12 +75,15 @@ namespace tank.core
             _rigidbody.constraints = _isAlive ? RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ : RigidbodyConstraints.None;            
         }
 
+        public void Jump()
+        {
+            _rigidbody.AddForce(10f * _rigidbody.mass * Vector3.up, ForceMode.Impulse);
+        }
+
         public void Destroy()
         {
-
-
             OnDestroyed?.Invoke(this);
-            KhtPool.ReturnObject(this.gameObject);
+            KhtPool.ReturnObject(gameObject);
         }
     }
 }

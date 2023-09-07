@@ -8,5 +8,6 @@ namespace tank.config
     public class EnemyConfig : UnitConfig
     {
         [field: SerializeField] public float Damage { get; private set; }
+        [field: SerializeField] public float ReactionTime { get; private set; }
     }
 }

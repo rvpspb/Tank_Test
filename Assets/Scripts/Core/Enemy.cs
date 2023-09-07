@@ -27,8 +27,9 @@ namespace tank.core
             _gameObject = enemyMover.gameObject;
 
             _botAI = _gameObject.GetComponent<BotAI>();
-            _botAI.Construct(target);
+            _botAI.Construct(target, enemyConfig.Damage, enemyConfig.ReactionTime);
             _botAI.OnRotateDirectionChange += SetMoverRotation;
+            _botAI.OnLostTarget += StopMover;
 
             UnitMover.SetMoveDirection(1f);
 
@@ -47,10 +48,17 @@ namespace tank.core
             UnitMover.SetRotateDirection(direction);
         }
 
+        private void StopMover()
+        {
+            UnitMover.SetRotateDirection(0f);
+            UnitMover.SetMoveDirection(0f);
+        }
+
         public override void Die()
         {
             UnitMover.OnTakeDamage -= TakeDamage;
             _botAI.OnRotateDirectionChange -= SetMoverRotation;
+            _botAI.OnLostTarget -= StopMover;
             base.Die();
         }
 

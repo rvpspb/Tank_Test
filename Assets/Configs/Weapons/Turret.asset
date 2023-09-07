@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Turret
   m_EditorClassIdentifier: 
   <WeaponType>k__BackingField: 0
-  <WeaponPrefab>k__BackingField: {fileID: 8664399419679903009, guid: 683aefaba3db51b4883e5fea7ba3e86b, type: 3}
+  <WeaponPrefab>k__BackingField: {fileID: 9204843922152365857, guid: 0e65cc2c20c81a144a85ee104000d715, type: 3}
   <Damage>k__BackingField: 5
   <FireRate>k__BackingField: 8
   <BulletPrefab>k__BackingField: {fileID: 3733783124120622055, guid: 0f66f2b29ac136e4c896fb79a5953386, type: 3}

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9234cd3dc7442242ac05b736b41543d, type: 3}
   m_Name: Medium Enemy
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 4540187367202636339, guid: 089cd68ced3be0a48ba6f84ff20dfdda, type: 3}
-  <Health>k__BackingField: 20
+  <Prefab>k__BackingField: {fileID: 1265942344099153285, guid: 8b10e0e3dbccc8a4f8cfffe585b9e569, type: 3}
+  <Health>k__BackingField: 15
   <Armor>k__BackingField: 0.2
-  <MoveSpeed>k__BackingField: 5
-  <RotationSpeed>k__BackingField: 5
+  <MoveSpeed>k__BackingField: 4
+  <RotationSpeed>k__BackingField: 4
   <Damage>k__BackingField: 10
+  <ReactionTime>k__BackingField: 0.5

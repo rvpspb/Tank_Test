@@ -4,6 +4,7 @@ using tank.config;
 using tank.factory;
 using tank.data;
 using npg.bindlessdi;
+using SimplePool;
 
 namespace tank.core
 {
@@ -16,9 +17,10 @@ namespace tank.core
         private PlayerDataHandler _leftPlayerData;
         private PlayerDataHandler _rightPlayerData;
         private readonly LevelFactory _levelFactory;
-        
+        //private Player _player;
 
         public event Action<PaddleSide, int> OnScore;
+        public event Action OnPlayerDie;
 
         public GameController(LevelFactory levelFactory, GameConfig gameConfig, input.IInput input)
         {
@@ -38,6 +40,7 @@ namespace tank.core
             Container.Initialize().BindInstance(_currentLevel);
 
             _currentLevel.Construct();
+            
             //_currentLevel.SpawnPlayer();
 
             //
@@ -73,6 +76,9 @@ namespace tank.core
         public void EndGame()
         {
             
+            _currentLevel.ClearSpawn();
+            KhtPool.ReturnObject(_currentLevel.gameObject);
+            //_player.OnDie -= OnPlayerDie;
         }
 
         

@@ -24,7 +24,7 @@ namespace tank.core
         private Camera _camera;
         private Transform _playerTransform;
 
-        public void Construct(int needCount)
+        public void Construct(Transform target, int needCount)
         {
             base.Construct();
 
@@ -35,7 +35,7 @@ namespace tank.core
             _enemyFactory = container.Resolve<EnemyFactory>();
             _enemyConfigSet = container.Resolve<EnemyConfigSet>();
 
-            _playerTransform = container.Resolve<Player>().UnitMover.transform;
+            _playerTransform = target;
 
             _needCount = needCount;
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   <WeaponType>k__BackingField: 0
-  <WeaponPrefab>k__BackingField: {fileID: 3277571471139241803, guid: 8b7fa76dd13a22f418fdb24f5c885139, type: 3}
+  <WeaponPrefab>k__BackingField: {fileID: 9204843922152365857, guid: e8a51c242b5d05c40b40a6288c2c841d, type: 3}
   <Damage>k__BackingField: 20
   <FireRate>k__BackingField: 2
   <BulletPrefab>k__BackingField: {fileID: 3733783124120622055, guid: 0f66f2b29ac136e4c896fb79a5953386, type: 3}

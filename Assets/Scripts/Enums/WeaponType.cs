@@ -1,7 +1,7 @@
 
 public enum WeaponType 
 {
-    BaseGun,
-    Turren,
+    SingleGun,
+    Turret,
     Shotgun
 }

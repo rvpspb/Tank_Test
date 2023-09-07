@@ -23,11 +23,14 @@ namespace tank.core
 
             _gameObject = KhtPool.GetObject(playerConfig.Prefab);
             _gameObject.transform.position = level.PlayerStartPoint.position;
+            _gameObject.transform.rotation = level.PlayerStartPoint.rotation;
+            _gameObject.SetActive(true);
 
             _input = input;
             _input.OnUpdate += GetInput;
             
             UnitMover = _gameObject.GetComponent<UnitMover>();
+            UnitMover.OnTakeDamage += TakeDamage;
             UnitMover.Construct(playerConfig);
 
             _weaponSpawner = _gameObject.GetComponent<WeaponSpawner>();
@@ -63,9 +66,13 @@ namespace tank.core
 
         public override void Die()
         {
-            _input.OnUpdate -= GetInput;
+            _weaponSpawner.ClearSpawned();
+            _input.OnUpdate -= GetInput;            
             base.Die();
+            UnitMover.Jump();
         }
+
+        
 
         //~Player()
         //{

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9234cd3dc7442242ac05b736b41543d, type: 3}
   m_Name: Small Enemy
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 7731555148791749028, guid: 5fe001f60fd901b4393c36fa934841a2, type: 3}
+  <Prefab>k__BackingField: {fileID: 1265942344099153285, guid: aa2893e80ada2e441a5d5196f9d00786, type: 3}
   <Health>k__BackingField: 10
   <Armor>k__BackingField: 0.1
-  <MoveSpeed>k__BackingField: 7
-  <RotationSpeed>k__BackingField: 7
+  <MoveSpeed>k__BackingField: 5
+  <RotationSpeed>k__BackingField: 5
   <Damage>k__BackingField: 5
+  <ReactionTime>k__BackingField: 0.25
