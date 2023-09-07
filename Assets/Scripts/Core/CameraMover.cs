@@ -12,6 +12,7 @@ public class CameraMover : MonoBehaviour
     {
         _target = target;
         _hasTarget = true;
+        transform.position = _target.position;
     }
 
     private void LateUpdate()

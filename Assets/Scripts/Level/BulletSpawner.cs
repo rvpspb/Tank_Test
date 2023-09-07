@@ -21,14 +21,13 @@ namespace tank.core
             //_spawned = new List<Bullet>();
         }
 
-        public Bullet Spawn(WeaponConfig weaponConfig, Vector3 position, Quaternion rotation)
+        public Bullet Spawn(WeaponConfig weaponConfig, Vector3 position, Quaternion rotation, float bulletDamage)
         {
             Bullet instance = _bulletFactory.GetNewInstance(weaponConfig);
             AddToSpawned(instance);
+            instance.Construct(weaponConfig, bulletDamage);
             instance.transform.localScale = weaponConfig.BulletScale * Vector3.one;
             instance.transform.SetPositionAndRotation(position, rotation);            
-            //_spawned.Add(instance);
-            //instance.OnDestroyed += RemoveFromSpawned;
             return instance;
         }
     }

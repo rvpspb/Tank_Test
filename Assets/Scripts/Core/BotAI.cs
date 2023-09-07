@@ -5,27 +5,34 @@ using tank.config;
 namespace tank.core
 {
     public class BotAI : MonoBehaviour
-    {
+    {                
+        private Transform _target;        
         
-        private float _checkTime;
-        private int _checkDirection;
-        private int _lastMoveDirection;
-        private float _proxy;
-        private bool _ballWasNear;
-        
-        private Collider[] _colliders = new Collider[1];        
-        
-        public event Action<float> OnDirectionChange;
+        public event Action<float> OnRotateDirectionChange;
 
-        public void Construct()
+        public void Construct(Transform target)
         {
-            
-            _proxy = 0.5f * transform.localScale.y;
-            _lastMoveDirection = 0;
-            _ballWasNear = false;
+            _target = target;            
         }
-        
 
-        
+        private void FixedUpdate()
+        {
+            if (!_target)
+            {
+                return;
+            }
+
+            SolveRotateDirection();
+        }
+
+        private void SolveRotateDirection()
+        {
+            float direction;
+            Vector3 targetDirection = _target.position - transform.position;
+            targetDirection.y = 0f;
+            Quaternion delta = Quaternion.FromToRotation(transform.forward, targetDirection);
+            direction = Mathf.Clamp( delta.y, -1f, 1f);
+            OnRotateDirectionChange?.Invoke(direction);
+        }
     }
 }

@@ -10,43 +10,39 @@ using tank.factory;
 namespace tank.core
 {
     public class Player : Unit
-    {
-        //public UnitView View { get; private set; }
-
-        private IInput _input;
-
-        private UnitMover _unitMover;
+    {        
+        private readonly IInput _input;
+        //public readonly UnitMover _unitMover;              
+        private readonly WeaponSpawner _weaponSpawner;
         private Weapon _weapon;
-        //private WeaponFactory _weaponFactory;
-        private WeaponSpawner _weaponSpawner;
-        
 
-        public Player(PlayerConfig playerConfig, WeaponFactory weaponFactory, WeaponConfigSet weaponConfigSet, IInput input, CameraMover cameraMover)
-        { 
+        public Player(PlayerConfig playerConfig, Level level, IInput input, CameraMover cameraMover)
+        {
+            Health = playerConfig.Health;
+            Armor = playerConfig.Armor;
+
             _gameObject = KhtPool.GetObject(playerConfig.Prefab);
-            
+            _gameObject.transform.position = level.PlayerStartPoint.position;
+
             _input = input;
             _input.OnUpdate += GetInput;
             
-            _unitMover = _gameObject.GetComponent<UnitMover>();
-            _unitMover.Construct(playerConfig);
+            UnitMover = _gameObject.GetComponent<UnitMover>();
+            UnitMover.Construct(playerConfig);
 
             _weaponSpawner = _gameObject.GetComponent<WeaponSpawner>();
             _weaponSpawner.Construct(_gameObject.transform);
+            LoadWeapon();
 
             cameraMover.SetTarget(_gameObject.transform);
 
-
-
-            //_weaponFactory = weaponFactory;
-            //_currentWeaponType = WeaponType.BaseGun;
-            LoadWeapon();
+            SetAlive(true);
         }
 
         private void GetInput()
         {
-            _unitMover.SetMoveDirection(_input.Vertical);
-            _unitMover.SetRotateDirection(_input.Horizontal);
+            UnitMover.SetMoveDirection(_input.Vertical);
+            UnitMover.SetRotateDirection(_input.Horizontal);
 
             if (_weaponSpawner.SwitchWeapon(_input.WeaponWheel))
             {
@@ -59,30 +55,21 @@ namespace tank.core
             }
         }
 
-        
-
         private void LoadWeapon()
         {
             _weaponSpawner.ClearSpawned();
-
             _weapon = _weaponSpawner.Spawn();
-
-            //_weapon = _weaponFactory.GetNewInstance(_currentWeaponType);
-            //_weapon.transform.SetParent(_gameObject.transform);
-            //_weapon.transform.localPosition = Vector3.zero;
-            //_weapon.transform.localRotation = Quaternion.identity;
         }
 
-        protected override void Die()
+        public override void Die()
         {
             _input.OnUpdate -= GetInput;
-
             base.Die();
         }
 
-        ~Player()
-        {
-            _input.OnUpdate -= GetInput;
-        }
+        //~Player()
+        //{
+        //    _input.OnUpdate -= GetInput;
+        //}
     }
 }

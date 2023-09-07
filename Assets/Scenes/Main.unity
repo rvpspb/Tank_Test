@@ -157,6 +157,7 @@ MonoBehaviour:
   _playerConfig: {fileID: 11400000, guid: 6074ad15ef469ca49aa7e577579749bb, type: 2}
   _cameraMover: {fileID: 2015196403}
   _weaponConfigSet: {fileID: 11400000, guid: b57d2ffeddf3d26479088ccb379c6eb9, type: 2}
+  _enemyConfigSet: {fileID: 11400000, guid: 1293aed88ced5334a907b70df595ecf6, type: 2}
   _levelPrefab: {fileID: 2718228617613246699, guid: 8e8449ab427f9434d9d2aaf499bcdcf4, type: 3}
 --- !u!4 &420884937
 Transform:

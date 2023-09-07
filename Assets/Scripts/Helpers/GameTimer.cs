@@ -35,6 +35,18 @@ namespace tank.helpers
             WaitTime(_cancelSource.Token);            
         }
 
+        public void Start(Action action)
+        {
+            if (IsRunning)
+            {
+                return;
+            }
+
+            _cancelSource = new CancellationTokenSource();
+            IsRunning = true;
+            WaitTime(_cancelSource.Token).ContinueWith(action);
+        }
+
         public void Stop()
         {
             IsRunning = false;

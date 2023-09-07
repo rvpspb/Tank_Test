@@ -35,12 +35,16 @@ namespace tank.core
         public void LoadLevel()
         {
             _currentLevel = _levelFactory.GetNewInstance();
+            Container.Initialize().BindInstance(_currentLevel);
+
             _currentLevel.Construct();
+            //_currentLevel.SpawnPlayer();
+
             //
 
             //Container container = Container.Initialize();
 
-            
+
 
 
         }
@@ -57,8 +61,8 @@ namespace tank.core
         
 
         public void StartGame()
-        {           
-                    
+        {
+            _currentLevel.StartSpawn();
         }
 
         public void StopGame()

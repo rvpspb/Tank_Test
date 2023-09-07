@@ -9,7 +9,7 @@ namespace tank.config
     public class WeaponConfigSet : ScriptableObject
     {
         [field: SerializeField] public List<WeaponConfig> WeaponConfigs { get; private set; }
-        [field: SerializeField] public int WeaponsCount => WeaponConfigs.Count;
+        public int WeaponsCount => WeaponConfigs.Count;
         
         public WeaponConfig GetWeaponConfig(WeaponType weaponType)
         {

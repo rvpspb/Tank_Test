@@ -9,11 +9,14 @@ namespace tank.core
 {
     public class Bullet : MonoBehaviour, IDestroy<Bullet>
     {
+        [SerializeField] private LayerMask _checkLayers;
+
         private WeaponConfig _weaponConfig;
         private float _moveSpeed;
         private float _damage;
-        private float _lifeTime;
+        private readonly float _lifeTime = 2f;
         private float _bornTime;
+        private readonly float _pushForce = 0.5f;
 
         public event Action<Bullet> OnDestroyed;
 
@@ -24,22 +27,60 @@ namespace tank.core
             _moveSpeed = _weaponConfig.BulletSpeed;
             _damage = bulletDamage;
 
-            _bornTime = Time.time;
-            _lifeTime = 2f;
+            _bornTime = Time.time;            
         }
 
         private void Update()
         {
-            transform.position += _moveSpeed * Time.deltaTime * transform.forward;
+            Move();
+
+            CheckFront();
 
             if (_bornTime + _lifeTime < Time.time)
             {
-                KhtPool.ReturnObject(gameObject);
-                OnDestroyed?.Invoke(this);
+                Die();
             }
         }
 
-        
+        private void Move()
+        {
+            transform.position += _moveSpeed * Time.deltaTime * transform.forward;
+        }
+
+        private void CheckFront()
+        {
+            float distance = 2f * _moveSpeed * Time.deltaTime;
+            Vector3 end = transform.position;
+            Vector3 start = end - transform.forward * distance;
+            RaycastHit raycastHit;
+
+            if (!Physics.Linecast(start, end, out raycastHit, _checkLayers))
+            {
+                return;
+            }
+
+            Rigidbody hitRigidbody = raycastHit.collider.attachedRigidbody;
+
+            if (!hitRigidbody)
+            {
+                Die();
+                return;
+            }
+
+            if (hitRigidbody.TryGetComponent(out IDamageable damageable))
+            {
+                hitRigidbody.AddForce(_damage * _pushForce * transform.forward, ForceMode.Impulse);
+
+                damageable.TakeDamage(_damage);
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            KhtPool.ReturnObject(gameObject);
+            OnDestroyed?.Invoke(this);
+        }
 
         //private void OnDestroy()
         //{

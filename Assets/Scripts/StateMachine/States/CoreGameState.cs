@@ -36,8 +36,8 @@ namespace tank.states
 			_playPanel.ClearScore();
 			_gameController.StartGame();
 
-			_gameTimer = new GameTimer(_gameConfig.GamePeriod);
-			_gameTimer.Start();
+			//_gameTimer = new GameTimer(_gameConfig.GamePeriod);
+			//_gameTimer.Start();
 
 			//_gameController.OnScore += OnScore;
 			//_gameTimer.OnTargetTime += OnTimer;

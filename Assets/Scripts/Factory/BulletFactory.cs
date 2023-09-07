@@ -9,11 +9,11 @@ namespace tank.factory
 {
     public class BulletFactory : MonoFactory<Bullet>
     {
-        WeaponConfigSet _weaponConfigSet;
+        //WeaponConfigSet _weaponConfigSet;
 
-        public BulletFactory(WeaponConfigSet weaponConfigSet)
+        public BulletFactory()
         {
-            _weaponConfigSet = weaponConfigSet;
+            
         }
 
         public Bullet GetNewInstance(WeaponConfig weaponConfig)

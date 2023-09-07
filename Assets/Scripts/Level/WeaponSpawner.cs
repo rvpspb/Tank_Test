@@ -9,17 +9,14 @@ namespace tank.core
 {
     public class WeaponSpawner : MonoSpawner<Weapon>
     {
-        //private Weapo
-
+        
         private WeaponFactory _weaponFactory;
-        private WeaponConfigSet _weaponConfigSet;
-        //private WeaponType _currentWeaponType;
+        private WeaponConfigSet _weaponConfigSet;        
         private int _currentWeaponNumber;
         private int _maxWeaponNumber;
         private Transform _weaponParent;
-
         private float _lastTimeWeaponSwitch;
-        private float _weaponSwitchDelay = 0.5f;
+        private readonly float _weaponSwitchDelay = 0.25f;
 
         public void Construct(Transform weaponParent)
         {
@@ -35,8 +32,6 @@ namespace tank.core
             _maxWeaponNumber = _weaponConfigSet.WeaponsCount - 1;
             _currentWeaponNumber = 0;
 
-
-            //_weaponFactory = weaponFactory;
             _lastTimeWeaponSwitch = Time.time;
         }
 
@@ -46,8 +41,6 @@ namespace tank.core
             {
                 return false;
             }
-
-            //Spawn();
 
             if (change > 0)
             {

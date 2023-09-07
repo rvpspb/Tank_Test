@@ -19,6 +19,7 @@ namespace tank.di
         [SerializeField] private CameraMover _cameraMover;
 
         [SerializeField] private WeaponConfigSet _weaponConfigSet;
+        [SerializeField] private EnemyConfigSet _enemyConfigSet;
         [SerializeField] private Level _levelPrefab;        
 
         private IInput _input;
@@ -27,17 +28,14 @@ namespace tank.di
         {
             Container container = Container.Initialize();
 
-            
-
             _input = _keyboardInput;
             container.BindInstance(_input);
-
-            //container.BindImplementation<IInput, KeyboardInput>();
             
             container.BindInstance(_gameConfig);
             container.BindInstance(_playerConfig);
             container.BindInstance(_cameraMover);
             container.BindInstance(_weaponConfigSet);
+            container.BindInstance(_enemyConfigSet);
             container.BindInstance(_levelPrefab);
             //container.BindInstance(_levelFactory);            
 
