@@ -60,6 +60,7 @@ namespace tank.core
 
             if (!hitRigidbody)
             {
+                VFXProvider.Instance.Emit(VFXType.SparksSplash, raycastHit.point, Quaternion.LookRotation(raycastHit.normal, Vector3.up));
                 Die();
                 return;
             }
@@ -67,9 +68,9 @@ namespace tank.core
             if (hitRigidbody.TryGetComponent(out IDamageable damageable))
             {
                 hitRigidbody.AddForce(_damage * _pushForce * transform.forward, ForceMode.Impulse);
-
                 damageable.TakeDamage(_damage);
-                Die();
+                VFXProvider.Instance.Emit(VFXType.BloodSplash, raycastHit.point, Quaternion.LookRotation(raycastHit.normal, Vector3.up));
+                Die();                
             }
         }
 

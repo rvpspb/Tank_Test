@@ -73,8 +73,17 @@ namespace tank.core
             if (rigidbody.TryGetComponent(out IDamageable damageable))
             {
                 damageable.TakeDamage(_damage);
+                SpawnVFX(collision);
                 _lastAttackTime = Time.time;
             }
+        }
+
+        private void SpawnVFX(Collision collision)
+        {
+            Vector3 point = collision.collider.ClosestPoint(transform.position);
+            Vector3 direction = transform.position - collision.collider.transform.position;
+            direction.y = 0f;
+            VFXProvider.Instance.Emit(VFXType.SparksSplash, point, Quaternion.LookRotation(direction, Vector3.up), 30);
         }
     }
 }
