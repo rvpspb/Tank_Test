@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using tank.factory;
@@ -15,13 +15,6 @@ namespace tank.core
         {            
             _spawned = new List<TType>();
         }
-
-        //public TType Spawn()
-        //{
-        //    TType instance = _monoFactory.GetNewInstance();
-        //    AddToSpawned(instance);
-        //    return instance;
-        //}
 
         protected void AddToSpawned(TType instance)
         {
@@ -45,10 +38,5 @@ namespace tank.core
 
             _spawned.Clear();
         }
-
-        //private void OnDestroy()
-        //{
-        //    ClearSpawned();
-        //}
     }
 }

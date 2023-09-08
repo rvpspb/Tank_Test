@@ -13,41 +13,26 @@ namespace tank.core
         [SerializeField] private BoxCollider _spawnVolume;
 
         private EnemyFactory _enemyFactory;
-        private EnemyConfigSet _enemyConfigSet;
-        //private int _currentWeaponNumber;
-        //private int _maxEnemyNumber;
-        //private Transform _weaponParent;
-        //private float _lastTimeWeaponSwitch;
-        //private readonly float _weaponSwitchDelay = 0.25f;
+        private EnemyConfigSet _enemyConfigSet;        
         private int _needCount;
         private bool _isActive;
         private Camera _camera;
         private Transform _playerTransform;
 
-        public void Construct(Transform target, int needCount)
+        public void Construct(Transform target)
         {
             base.Construct();
-
-            //_weaponParent = weaponParent;
 
             Container container = Container.Initialize();
 
             _enemyFactory = container.Resolve<EnemyFactory>();
             _enemyConfigSet = container.Resolve<EnemyConfigSet>();
+            GameConfig gameConfig = container.Resolve<GameConfig>();
 
             _playerTransform = target;
-
-            _needCount = needCount;
-
+            _needCount = gameConfig.BotsCount;
             _camera = Camera.main;
-
             _isActive = false;
-
-            //_maxEnemyNumber = _enemyConfigSet.EnemiesCount;
-            //_maxWeaponNumber = _weaponConfigSet.WeaponsCount - 1;
-            //_currentWeaponNumber = 0;
-
-            //_lastTimeWeaponSwitch = Time.time;
         }
 
         public void StartSpawn()
@@ -55,7 +40,6 @@ namespace tank.core
             _isActive = true;
         }
         
-
         private void Update()
         {
             if (!_isActive)
@@ -70,15 +54,12 @@ namespace tank.core
         }
 
         private bool NeedSpawn()
-        {           
-
+        {
             return _spawned.Count < _needCount;
         }
 
         private bool TrySpawn(out Enemy enemy)
-        {
-            enemy = null;
-
+        {            
             Vector3 spawnPosition;
 
             spawnPosition.x = UnityEngine.Random.Range(_spawnVolume.bounds.min.x, _spawnVolume.bounds.max.x);
@@ -87,27 +68,21 @@ namespace tank.core
             
             if (CheckVisible(spawnPosition))
             {
+                enemy = null;
                 return false;
             }
 
             int enemyNumber = UnityEngine.Random.Range(0, _enemyConfigSet.EnemiesCount);
-
             UnitMover unitMover = Spawn(enemyNumber, spawnPosition);
 
-            enemy = new Enemy(_enemyConfigSet.EnemyConfigs[enemyNumber], unitMover, _playerTransform);
-
+            enemy = new Enemy(_enemyConfigSet.EnemyConfigs[enemyNumber], unitMover, _playerTransform);            
             return true;
-
-            //Spawn(enemyNumber, spawnPosition);
         }
-
-
 
         public UnitMover Spawn(int enemyNumber, Vector3 position)
         {
             UnitMover enemyMover = _enemyFactory.GetNewInstance(enemyNumber);
-            AddToSpawned(enemyMover);
-            //enemyMover.transform.SetParent(_weaponParent);
+            AddToSpawned(enemyMover);            
             enemyMover.transform.SetPositionAndRotation(position, Quaternion.identity);
             return enemyMover;
         }

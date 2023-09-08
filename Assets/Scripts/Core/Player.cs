@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 using SimplePool;
-using System;
 using tank.config;
 using tank.input;
-using tank.factory;
 
 namespace tank.core
 {
     public class Player : Unit
     {        
         private readonly IInput _input;
-        //public readonly UnitMover _unitMover;              
         private readonly WeaponSpawner _weaponSpawner;
         private Weapon _weapon;
 
@@ -71,12 +66,5 @@ namespace tank.core
             base.Die();
             UnitMover.Jump();
         }
-
-        
-
-        //~Player()
-        //{
-        //    _input.OnUpdate -= GetInput;
-        //}
     }
 }

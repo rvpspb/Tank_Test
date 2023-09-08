@@ -12,9 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caa0ce1cb386eb498550e0605007727, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  <Player1Type>k__BackingField: 0
-  <Player2Type>k__BackingField: 0
-  <WinScore>k__BackingField: 0
-  <GamePeriod>k__BackingField: 0
-  <PuddleSpeed>k__BackingField: 0
-  <PuddleSize>k__BackingField: 0
+  <BotsCount>k__BackingField: 10

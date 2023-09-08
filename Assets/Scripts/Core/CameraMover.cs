@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CameraMover : MonoBehaviour
 {
+    [SerializeField] private float _moveSpeed = 10;
+
     private Transform _target;
     private bool _hasTarget;
-    private float _moveSpeed = 10;
+    
 
     public void SetTarget(Transform target)
     {
@@ -18,8 +20,6 @@ public class CameraMover : MonoBehaviour
     private void LateUpdate()
     {
         FollowTarget();
-
-
     }
 
     private void FollowTarget()

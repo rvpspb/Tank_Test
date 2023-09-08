@@ -1,6 +1,8 @@
 
-
-public interface IDamageable
+namespace tank.core
 {
-    void TakeDamage(float damage);
+    public interface IDamageable
+    {
+        void TakeDamage(float damage);
+    }
 }

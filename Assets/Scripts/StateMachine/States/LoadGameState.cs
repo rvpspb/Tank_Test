@@ -6,12 +6,12 @@ namespace tank.states
 	public class LoadGameState : IGameState, IState
 	{
 		private readonly GameStateMachine _gameStateMachine;		
-		private readonly GameController _gameController;
+		private readonly Game _game;
 
-		public LoadGameState(GameStateMachine gameStateMachine, GameController gameController)
+		public LoadGameState(GameStateMachine gameStateMachine, Game game)
 		{
-			_gameStateMachine = gameStateMachine;			
-			_gameController = gameController;
+			_gameStateMachine = gameStateMachine;
+			_game = game;
 		}
 
 		public void Enter()
@@ -26,7 +26,7 @@ namespace tank.states
 
 		private void Load()
 		{	 
-			_gameController.LoadLevel();	
+			_game.LoadLevel();	
 			_gameStateMachine.Enter<StartGameState>();
 		}		
 	}

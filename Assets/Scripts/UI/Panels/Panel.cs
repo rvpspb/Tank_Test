@@ -17,7 +17,7 @@ namespace tank.ui
 
         public void Hide()
         {
-            if (enabled)
+            if (this)
             {
                 gameObject.SetActive(false);
                 OnHide();

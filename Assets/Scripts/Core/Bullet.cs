@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using tank.config;
 using System;
@@ -26,14 +25,12 @@ namespace tank.core
             transform.localScale = _weaponConfig.BulletScale * Vector3.one;
             _moveSpeed = _weaponConfig.BulletSpeed;
             _damage = bulletDamage;
-
             _bornTime = Time.time;            
         }
 
         private void Update()
         {
             Move();
-
             CheckFront();
 
             if (_bornTime + _lifeTime < Time.time)
@@ -81,10 +78,5 @@ namespace tank.core
             KhtPool.ReturnObject(gameObject);
             OnDestroyed?.Invoke(this);
         }
-
-        //private void OnDestroy()
-        //{
-        //    OnDestroyed?.Invoke(this);
-        //}
     }
 }

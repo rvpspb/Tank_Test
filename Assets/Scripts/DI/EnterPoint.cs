@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using npg.bindlessdi;
 using tank.states;
@@ -17,7 +16,6 @@ namespace tank.di
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private CameraMover _cameraMover;
-
         [SerializeField] private WeaponConfigSet _weaponConfigSet;
         [SerializeField] private EnemyConfigSet _enemyConfigSet;
         [SerializeField] private Level _levelPrefab;        
@@ -29,15 +27,13 @@ namespace tank.di
             Container container = Container.Initialize();
 
             _input = _keyboardInput;
-            container.BindInstance(_input);
-            
+            container.BindInstance(_input);            
             container.BindInstance(_gameConfig);
             container.BindInstance(_playerConfig);
             container.BindInstance(_cameraMover);
             container.BindInstance(_weaponConfigSet);
             container.BindInstance(_enemyConfigSet);
-            container.BindInstance(_levelPrefab);
-            //container.BindInstance(_levelFactory);            
+            container.BindInstance(_levelPrefab);                    
 
             GameStateMachine gameStateMachine = container.Resolve<GameStateMachine>();
             gameStateMachine.Enter<LoadGameState>();

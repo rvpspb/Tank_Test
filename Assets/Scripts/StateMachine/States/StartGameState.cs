@@ -1,8 +1,5 @@
 using npg.states.Infrastructure;
-using Cysharp.Threading.Tasks;
 using npg.bindlessdi.UnityLayer;
-using tank.core;
-using tank.config;
 using tank.input;
 using tank.ui;
 
@@ -11,16 +8,14 @@ namespace tank.states
 	public class StartGameState : IGameState, IState
 	{
 		private readonly GameStateMachine _gameStateMachine;
-		private readonly UnityObjectContainer _unityObjectContainer;
-		private readonly GameController _gameController;
+		private readonly UnityObjectContainer _unityObjectContainer;		
 		private readonly IInput _input;
 		private StartPanel _startPanel;
 
-		public StartGameState(GameStateMachine gameStateMachine, UnityObjectContainer unityObjectContainer, GameConfig gameConfig, GameController gameController, IInput input)
+		public StartGameState(GameStateMachine gameStateMachine, UnityObjectContainer unityObjectContainer, IInput input)
 		{
 			_gameStateMachine = gameStateMachine;
-			_unityObjectContainer = unityObjectContainer;
-			_gameController = gameController;
+			_unityObjectContainer = unityObjectContainer;			
 			_input = input;
 		}
 
@@ -32,9 +27,7 @@ namespace tank.states
 			}
 
 			_input.SetEnabled(true);
-
-			_startPanel.Show();
-			_gameController.ResetLevel();
+			_startPanel.Show();			
 
 			_input.OnAnyKey += StartGame;
 		}

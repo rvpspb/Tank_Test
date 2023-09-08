@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using tank.config;
-using tank.core;
 using SimplePool;
 
 namespace tank.factory

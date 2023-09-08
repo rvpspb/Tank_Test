@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using tank.config;
 
 namespace tank.core
 {

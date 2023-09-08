@@ -10,8 +10,6 @@ namespace tank.input
         public bool IsFireHold { get; private set; }
         public bool IsInverted { get; private set; }
         public bool IsEnabled { get; private set; }
-
-        private int _directionMod;
         public float Vertical { get; private set; }
         public float Horizontal { get; private set; }
         public float WeaponWheel { get; private set; }
@@ -49,7 +47,6 @@ namespace tank.input
 
             OnUpdate?.Invoke();
         }
-
 
         public void SetEnabled(bool value)
         {

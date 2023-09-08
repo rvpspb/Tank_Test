@@ -154,7 +154,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e3958cb01faafb04693b2c38d38e2363, type: 2}
+  - {fileID: 2100000, guid: 7bf99c0ebfb4afe45907fc2d6598a4c6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -229,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6127626025041167361, guid: a16a6e923c445254db25f2fc60068c9a, type: 3}
       propertyPath: m_Name
-      value: Single Gun 1
+      value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 6692222608427511322, guid: a16a6e923c445254db25f2fc60068c9a, type: 3}
       propertyPath: _shootPoints.Array.size

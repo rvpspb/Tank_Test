@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 using System;
 
-public interface IDestroy<TType> 
+namespace tank.core
 {
-    event Action<TType> OnDestroyed;
+    public interface IDestroy<TType>
+    {
+        event Action<TType> OnDestroyed;
+    }
 }

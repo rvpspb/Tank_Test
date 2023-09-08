@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using tank.config;
 using System;
@@ -14,8 +12,7 @@ namespace tank.core
         private Rigidbody _rigidbody;
         private float _moveSpeed;
         private float _rotateSpeed;
-        private float _acceleration = 10f;
-        private Vector3 _lookDirection;
+        private readonly float _acceleration = 10f;        
         private bool _isAlive;
 
         public event Action<UnitMover> OnDestroyed;
@@ -23,13 +20,14 @@ namespace tank.core
 
         public void Construct(UnitConfig unitConfig)
         {
-            _rigidbody = GetComponent<Rigidbody>();
-            //_rigidbody.centerOfMass = Vector3.up;
+            if (!_rigidbody)
+            {
+                _rigidbody = GetComponent<Rigidbody>();
+            }
+            
             _moveSpeed = unitConfig.MoveSpeed;
             _rotateSpeed = unitConfig.RotationSpeed;
-
             SetAlive(true);
-            //_lookDirection = transform.forward;
         }
 
         public void SetMoveDirection(float value)
@@ -60,8 +58,7 @@ namespace tank.core
             needAngularVelocity.y = _rotateSpeed * _rotateDirection * Mathf.Sign(_moveDirection);
 
             _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, needVelocity, _acceleration * Time.fixedDeltaTime);
-            _rigidbody.angularVelocity = Vector3.Lerp(_rigidbody.angularVelocity, needAngularVelocity, _acceleration * Time.fixedDeltaTime);
-                        
+            _rigidbody.angularVelocity = Vector3.Lerp(_rigidbody.angularVelocity, needAngularVelocity, _acceleration * Time.fixedDeltaTime);                        
         }    
         
         public void TakeDamage(float damage)
@@ -77,7 +74,8 @@ namespace tank.core
 
         public void Jump()
         {
-            _rigidbody.AddForce(10f * _rigidbody.mass * Vector3.up, ForceMode.Impulse);
+            float jumpForce = 10f;
+            _rigidbody.AddForce(jumpForce * _rigidbody.mass * Vector3.up, ForceMode.Impulse);
         }
 
         public void Destroy()

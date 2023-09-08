@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using SimplePool;
 using System;
-using tank.config;
 using tank.helpers;
 
 namespace tank.core
@@ -45,12 +42,9 @@ namespace tank.core
 
             UnitMover.SetAlive(false);
 
-            GameTimer gameTimer = new GameTimer(3);
+            float destroyDelay = 3f;
+            GameTimer gameTimer = new GameTimer(destroyDelay);
             gameTimer.Start(() => UnitMover.Destroy());
-
-            //_unitMover.Destroy();
-
-            //KhtPool.ReturnObject(_gameObject);
         }
     }
 }

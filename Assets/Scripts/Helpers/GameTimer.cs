@@ -9,7 +9,7 @@ namespace tank.helpers
         public float TargetTime { get; private set; }
         public bool IsRunning { get; private set; }
 
-        public event Action OnTargetTime;
+        public event Action OnFinish;
 
         CancellationTokenSource _cancelSource;
 
@@ -35,7 +35,7 @@ namespace tank.helpers
             WaitTime(_cancelSource.Token);            
         }
 
-        public void Start(Action action)
+        public void Start(Action callback)
         {
             if (IsRunning)
             {
@@ -44,7 +44,7 @@ namespace tank.helpers
 
             _cancelSource = new CancellationTokenSource();
             IsRunning = true;
-            WaitTime(_cancelSource.Token).ContinueWith(action);
+            WaitTime(_cancelSource.Token).ContinueWith(callback);
         }
 
         public void Stop()
@@ -60,7 +60,7 @@ namespace tank.helpers
             if (IsRunning)
             {
                 IsRunning = false;
-                OnTargetTime?.Invoke();                
+                OnFinish?.Invoke();                
             }            
         }
     }
