@@ -32,7 +32,7 @@ namespace tank.core
             {
                 return;
             }
-            else if (_hasTarget && !_target.gameObject.activeInHierarchy)
+            else if (_hasTarget && (!_target || !_target.gameObject.activeInHierarchy))
             {
                 _hasTarget = false;
                 OnLostTarget?.Invoke();

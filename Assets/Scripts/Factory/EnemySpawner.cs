@@ -18,6 +18,7 @@ namespace tank.core
         private bool _isActive;
         private Camera _camera;
         private Transform _playerTransform;
+        private List<Enemy> _enemies;
 
         public void Construct(Transform target)
         {
@@ -33,11 +34,13 @@ namespace tank.core
             _needCount = gameConfig.BotsCount;
             _camera = Camera.main;
             _isActive = false;
+
+            _enemies = new List<Enemy>();
         }
 
-        public void StartSpawn()
+        public void SetActive(bool value)
         {
-            _isActive = true;
+            _isActive = value;
         }
         
         private void Update()
@@ -49,7 +52,7 @@ namespace tank.core
 
             if (NeedSpawn())
             {
-                TrySpawn(out Enemy enemy);
+                TrySpawn();
             }
         }
 
@@ -58,8 +61,8 @@ namespace tank.core
             return _spawned.Count < _needCount;
         }
 
-        private bool TrySpawn(out Enemy enemy)
-        {            
+        private bool TrySpawn()
+        {
             Vector3 spawnPosition;
 
             spawnPosition.x = UnityEngine.Random.Range(_spawnVolume.bounds.min.x, _spawnVolume.bounds.max.x);
@@ -67,15 +70,15 @@ namespace tank.core
             spawnPosition.z = UnityEngine.Random.Range(_spawnVolume.bounds.min.z, _spawnVolume.bounds.max.z);
             
             if (CheckVisible(spawnPosition))
-            {
-                enemy = null;
+            {                
                 return false;
             }
 
             int enemyNumber = UnityEngine.Random.Range(0, _enemyConfigSet.EnemiesCount);
             UnitMover unitMover = Spawn(enemyNumber, spawnPosition);
+            Enemy enemy = new Enemy(_enemyConfigSet.EnemyConfigs[enemyNumber], unitMover, _playerTransform);
+            _enemies.Add(enemy);
 
-            enemy = new Enemy(_enemyConfigSet.EnemyConfigs[enemyNumber], unitMover, _playerTransform);            
             return true;
         }
 
@@ -85,6 +88,16 @@ namespace tank.core
             AddToSpawned(enemyMover);            
             enemyMover.transform.SetPositionAndRotation(position, Quaternion.identity);
             return enemyMover;
+        }
+
+        public void ClearEnemies()
+        {
+            for (int i = 0; i < _enemies.Count; i++)
+            {
+                _enemies[i].Clear();
+            }
+
+            _enemies.Clear();
         }
 
         private bool CheckVisible(Vector3 worldPosition)

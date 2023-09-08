@@ -32,8 +32,9 @@ namespace tank.core
         {
             for (int i = 0; i < _spawned.Count; i++)
             {
-                KhtPool.ReturnObject(_spawned[i].gameObject);
+                
                 _spawned[i].OnDestroyed -= RemoveFromSpawned;
+                KhtPool.ReturnObject(_spawned[i].gameObject);
             }
 
             _spawned.Clear();

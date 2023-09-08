@@ -23,12 +23,13 @@ namespace tank.core
 
         public void StartSpawn()
         {            
-            _enemySpawner.StartSpawn();
+            _enemySpawner.SetActive(true);
         }        
 
         public void ClearSpawn()
-        {           
+        {            
             _bulletSpawner.ClearSpawned();
+            _enemySpawner.ClearEnemies();
             _enemySpawner.ClearSpawned();
         }
     }

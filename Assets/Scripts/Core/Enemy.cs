@@ -39,10 +39,15 @@ namespace tank.core
 
         public override void Die()
         {
+            Clear();
+            base.Die();
+        }
+
+        public void Clear()
+        {
             UnitMover.OnTakeDamage -= TakeDamage;
             _botAI.OnRotateDirectionChange -= SetMoverRotation;
             _botAI.OnLostTarget -= StopMover;
-            base.Die();
         }
     }
 }

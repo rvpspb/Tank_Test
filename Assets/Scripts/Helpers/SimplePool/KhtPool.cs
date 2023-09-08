@@ -41,11 +41,11 @@ namespace SimplePool
             prefabDatas = null;
         }
 
-        public static GameObject GetObject(GameObject prefab)
+        public static GameObject GetObject(GameObject prefab, Transform parent = null)
         {
             if (!Instance)
             {
-                return Instantiate(prefab);
+                return Instantiate(prefab, parent);
             }
 
             int prefabId = prefab.GetInstanceID();
@@ -58,10 +58,12 @@ namespace SimplePool
 
             if (Instance._pools[prefabId].Count > 0)
             {
-                return Instance._pools[prefabId].Dequeue();
+                GameObject gameObject = Instance._pools[prefabId].Dequeue();
+                gameObject.transform.parent = parent;
+                return gameObject;
             }
 
-            GameObject retObject = Instantiate(prefab);
+            GameObject retObject = Instantiate(prefab, parent);
             Instance._objectToPoolDict.Add(retObject.GetInstanceID(), prefabId);
             return retObject;
         }
